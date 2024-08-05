@@ -20,7 +20,27 @@ To install and use this script, you need to have `git` and `curl` installed on y
 ```bash
 git clone https://github.com/Byte-BloggerBase/AsN_GrApEr.git
 cd AsN_GrApEr
-./ASN_greper.sh "Test org"
+chmod +x AsN_GrApEr.sh
+./ASN_greper.sh -org "Target org"
 ```
+# Usage
+
+```
+Usage: ./ASN_greper.sh [OPTIONS] domain_name
+
+Fetch ASNs and subnets for a given organization name.
+
+Options:
+  -h, --help          Show this help message and exit
+  -o, --output FILE   Specify the output file
+  -org, --organization NAME  Specify the domain name (organization)
+```
+
+Example:
+
+```
+  ./ASN_greper.sh -o ~/user/output.txt -org "Test org"
+```
+
 
  > If anyone would like to contribute to the development of Byte-BloggerBase/AsN_GrApEr, please send an email to official@bytebloggerbase.com.
