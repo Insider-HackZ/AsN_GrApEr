@@ -15,10 +15,10 @@ This script helps you fetch Autonomous System Numbers (ASNs) associated with a g
 
 To install and use this script, you need to have `git` and `curl` installed on your system.
 
-### Clone the Repository
+### Clone the Repository and Run the script
 
 ```bash
-git clone https://github.com/yourusername/ASN_Greper.git
-cd ASN_Greper
+git clone https://github.com/Byte-BloggerBase/AsN_GrApEr.git
+cd AsN_GrApEr
 ./ASN_greper.sh "Test org"
 ```
