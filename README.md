@@ -22,3 +22,5 @@ git clone https://github.com/Byte-BloggerBase/AsN_GrApEr.git
 cd AsN_GrApEr
 ./ASN_greper.sh "Test org"
 ```
+
+ > If anyone would like to contribute to the development of Byte-BloggerBase/AsN_GrApEr, please send an email to official@bytebloggerbase.com.
