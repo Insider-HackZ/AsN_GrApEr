@@ -16,14 +16,12 @@ domain=$1
 encoded_domain=$(urlencode "$domain")
 function banner() {
     tput clear
-    printf "\n${bgreen}"
     printf "    _        _   _     ____       _          _____\n"
     printf "   / \   ___| \ | |   / ___|_ __ / \   _ __ | ____|_ __\n"
     printf "  / _ \ / __|  \| |  | |  _| '__/ _ \ | '_ \|  _| | '__|\n"
     printf " / ___ \ __ \ |\  |  | |_| | | / ___ \| |_) | |___| |\n"
     printf "/_/   \_\___/_| \_|___\____|_|/_/   \_\ .__/|_____|_|\n"
     printf "                 |_____|              |_| developed by:H@r&h\n"
-    printf "\n${reconftw_version}                                        \n"
 }
 
 banner
