@@ -52,7 +52,6 @@ urlencode() {
 encoded_domain=$(urlencode "$domain")
 
 function banner() {
-    tput clear
     printf "\n${bgreen}"
     printf "    _        _   _     ____       _          _____\n"
     printf "   / \   ___| \ | |   / ___|_ __ / \   _ __ | ____|_ __\n"
