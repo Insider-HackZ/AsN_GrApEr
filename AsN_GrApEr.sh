@@ -1,5 +1,42 @@
 #!/bin/bash
 
+show_help() {
+    echo "Usage: ./ASN_greper.sh [OPTIONS] domain_name"
+    echo
+    echo "Fetch ASNs and subnets for a given organization name."
+    echo
+    echo "Options:"
+    echo "  -h, --help          Show this help message and exit"
+    echo "  -o, --output FILE   Specify the output file"
+    echo "  -org, --organization NAME  Specify the domain name (organization)"
+    echo
+    echo "Example:"
+    echo "  ./ASN_greper.sh -o ~/user/output.txt -org \"Test org\""
+}
+
+output_file=""
+domain=""
+
+while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
+  -h | --help )
+    show_help
+    exit 0
+    ;;
+  -o | --output )
+    shift; output_file=$1
+    ;;
+  -org | --organization )
+    shift; domain=$1
+    ;;
+esac; shift; done
+if [[ "$1" == '--' ]]; then shift; fi
+
+if [ -z "$domain" ]; then
+    echo "Error: No domain provided."
+    show_help
+    exit 1
+fi
+
 urlencode() {
     local length="${#1}"
     for (( i = 0; i < length; i++ )); do
@@ -12,16 +49,18 @@ urlencode() {
     done
 }
 
-domain=$1
 encoded_domain=$(urlencode "$domain")
+
 function banner() {
     tput clear
+    printf "\n${bgreen}"
     printf "    _        _   _     ____       _          _____\n"
     printf "   / \   ___| \ | |   / ___|_ __ / \   _ __ | ____|_ __\n"
     printf "  / _ \ / __|  \| |  | |  _| '__/ _ \ | '_ \|  _| | '__|\n"
     printf " / ___ \ __ \ |\  |  | |_| | | / ___ \| |_) | |___| |\n"
     printf "/_/   \_\___/_| \_|___\____|_|/_/   \_\ .__/|_____|_|\n"
-    printf "                 |_____|              |_| developed by:Harshj054\n"
+    printf "                 |_____|              |_| developed by:H@r&h\n"
+    printf "\n${reconftw_version}                                        \n"
 }
 
 banner
@@ -43,7 +82,12 @@ rm ext/*-sorted_ans.txt
 
 awk 'FNR==1 {if (NR!=1) print ""} {print}' ext/* > ext/subnet.txt
 sort -u ext/subnet.txt > "ext/$domain.txt"
-mv "ext/$domain.txt" "ext/../$domain.txt"
+
+if [ -n "$output_file" ]; then
+    mv "ext/$domain.txt" "$output_file"
+else
+    mv "ext/$domain.txt" "ext/../$domain.txt"
+fi
+
 rm -r ext
 exit 0
-
