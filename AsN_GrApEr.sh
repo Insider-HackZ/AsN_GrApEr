@@ -58,8 +58,8 @@ function banner() {
     printf "  / _ \ / __|  \| |  | |  _| '__/ _ \ | '_ \|  _| | '__|\n"
     printf " / ___ \ __ \ |\  |  | |_| | | / ___ \| |_) | |___| |\n"
     printf "/_/   \_\___/_| \_|___\____|_|/_/   \_\ .__/|_____|_|\n"
-    printf "                 |_____|              |_| developed by:H@r&h\n"
-    printf "\n${reconftw_version}                                        \n"
+    printf "                 |_____|              |_| developed by:harshj054\n"
+    printf "\n                                     \n"
 }
 
 banner
