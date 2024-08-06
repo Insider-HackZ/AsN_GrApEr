@@ -11,7 +11,7 @@ show_help() {
     echo "  -org, --organization NAME  Specify the domain name (organization)"
     echo
     echo "Example:"
-    echo "  ./ASN_greper.sh -o ~/user/output.txt -org \"Test org\""
+    echo "  ./ASN_greper.sh -o ~/path/for/output_file -org \"Test org\""
 }
 
 output_file=""
@@ -52,7 +52,7 @@ urlencode() {
 }
 
 function ver_idf() {
-    local_version=v0.1.0.tar
+    local_version=v0.1.1.tar
 
     latest_version=$(curl -s https://api.github.com/repos/Byte-BloggerBase/AsN_GrApEr/releases/latest | grep '"tag_name":' | cut -d '"' -f 4)
 
@@ -108,10 +108,27 @@ rm ext/*-sorted_ans.txt
 awk 'FNR==1 {if (NR!=1) print ""} {print}' ext/* > ext/subnet.txt
 sort -u ext/subnet.txt > "ext/$domain.txt"
 
+function ip_gen() {
+    touch "ext/$domain-ips.txt"
+
+    while read -r subnet; do
+        if [[ "$subnet" != "0.0.0.0/0" ]]; then
+            # echo "$subnet"
+            prips "$subnet" >>"ext/$domain-ips.txt"
+        fi    
+    done < "ext/$domain.txt"
+}
+
+ip_gen
+
 if [ -n "$output_file" ]; then
-    mv "ext/$domain.txt" "$output_file"
+    mkdir -p "$output_file/AsN_GrApEr-output"
+    mv "ext/$domain.txt" "$output_file/AsN_GrApEr-output/"
+    mv "ext/$domain-ips.txt" "$output_file/AsN_GrApEr-output/"
 else
-    mv "ext/$domain.txt" "ext/../$domain.txt"
+    mkdir -p AsN_GrApEr-output
+    mv "ext/$domain.txt" "AsN_GrApEr-output/"
+    mv "ext/$domain-ips.txt" "AsN_GrApEr-output/"
 fi
 
 rm -r ext
