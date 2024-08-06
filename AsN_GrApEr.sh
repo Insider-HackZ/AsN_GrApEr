@@ -52,7 +52,7 @@ urlencode() {
 }
 
 function ver_idf() {
-    local_version=v0.1.1.
+    local_version=v0.1.1
 
     latest_version=$(curl -s https://api.github.com/repos/Byte-BloggerBase/AsN_GrApEr/releases/latest | grep '"tag_name":' | cut -d '"' -f 4)
 
