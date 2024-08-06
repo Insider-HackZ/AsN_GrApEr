@@ -39,6 +39,7 @@ fi
 
 urlencode() {
     local length="${#1}"
+    printf '"'
     for (( i = 0; i < length; i++ )); do
         local c="${1:i:1}"
         case $c in
@@ -47,6 +48,7 @@ urlencode() {
             *) printf '%%%02X' "'$c" ;;
         esac
     done
+    printf '"'
 }
 
 encoded_domain=$(urlencode "$domain")
