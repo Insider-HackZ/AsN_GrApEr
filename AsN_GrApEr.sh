@@ -51,6 +51,30 @@ urlencode() {
     printf '"'
 }
 
+function ver_idf() {
+    local_version=0.0.3
+
+    latest_version=$(curl -s https://api.github.com/repos/Byte-BloggerBase/AsN_GrApEr/releases/latest | grep '"tag_name":' | cut -d '"' -f 4)
+
+    if [ "$local_version" != "$latest_version" ]; then
+        echo "Your version ($local_version) is outdated. The latest version is $latest_version."
+        read -p "Do you want to update to the latest version? (y/n): " choice
+        if [ "$choice" == "y" ]; then
+            echo "Updating to version $latest_version..."
+            wget -O "$0" https://raw.githubusercontent.com/Byte-BloggerBase/AsN_GrApEr/main/AsN_GrApEr.sh
+            echo "Update completed || Current Version ($latest_version)."
+            echo "Run the tool again...."
+            local_version=$latest_version
+            exit 0
+        else
+            echo "Update canceled."
+        fi
+    else
+        echo "You are using the latest version ($local_version)."
+        local_version=$latest_version
+    fi
+}
+
 encoded_domain=$(urlencode "$domain")
 
 function banner() {
@@ -61,11 +85,11 @@ function banner() {
     printf " / ___ \ __ \ |\  |  | |_| | | / ___ \| |_) | |___| |\n"
     printf "/_/   \_\___/_| \_|___\____|_|/_/   \_\ .__/|_____|_|\n"
     printf "                 |_____|              |_| developed by:harshj054\n"
-    printf "\n                                     \n"
+    printf "\n                                        \n"
 }
-
 banner
 
+ver_idf
 mkdir -p ext
 curl -o "ext/$encoded_domain-ans_page.txt" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" "https://bgp.he.net/search?search%5Bsearch%5D=$encoded_domain&commit=Search"
 grep -o 'AS[0-9]\+' "ext/$encoded_domain-ans_page.txt" > "ext/$encoded_domain-asn_numbers.txt"
