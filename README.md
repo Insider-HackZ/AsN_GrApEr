@@ -43,4 +43,4 @@ Example:
 ```
 
 
- > If anyone would like to contribute to the development of Byte-BloggerBase/AsN_GrApEr, please send an email to official@bytebloggerbase.com.
+ > If anyone would like to contribute to the development of Insider-HackZ/AsN_GrApEr, please send an email to official@bytebloggerbase.com.
