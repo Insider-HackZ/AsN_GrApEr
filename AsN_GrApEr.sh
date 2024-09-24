@@ -54,14 +54,14 @@ urlencode() {
 function ver_idf() {
     local_version=v0.1.1
 
-    latest_version=$(curl -s https://api.github.com/repos/Byte-BloggerBase/AsN_GrApEr/releases/latest | grep '"tag_name":' | cut -d '"' -f 4)
+    latest_version=$(curl -s https://api.github.com/repos/Insider-HackZ/AsN_GrApEr/releases/latest | grep '"tag_name":' | cut -d '"' -f 4)
 
     if [ "$local_version" != "$latest_version" ]; then
         echo "Your version ($local_version) is outdated. The latest version is $latest_version."
         read -p "Do you want to update to the latest version? (y/n): " choice
         if [ "$choice" == "y" ]; then
             echo "Updating to version $latest_version..."
-            wget -O "$0" https://raw.githubusercontent.com/Byte-BloggerBase/AsN_GrApEr/main/AsN_GrApEr.sh
+            wget -O "$0" https://raw.githubusercontent.com/Insider-HackZ/AsN_GrApEr/main/AsN_GrApEr.sh
             echo "Update completed || Current Version ($latest_version)."
             echo "Run the tool again...."
             local_version=$latest_version
