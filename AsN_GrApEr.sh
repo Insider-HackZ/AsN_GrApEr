@@ -108,16 +108,20 @@ rm ext/*-sorted_ans.txt
 awk 'FNR==1 {if (NR!=1) print ""} {print}' ext/* > ext/subnet.txt
 sort -u ext/subnet.txt > "ext/$domain.txt"
 
-function ip_gen() {
+ip_gen() {
     touch "ext/$domain-ips.txt"
 
     while read -r subnet; do
-        if [[ "$subnet" != "0.0.0.0/0" ]]; then
-            # echo "$subnet"
-            prips "$subnet" >>"ext/$domain-ips.txt"
-        fi    
+        if [[ "$subnet" != "0.0.0.0/0" && -n "$subnet" ]]; then
+            if prips "$subnet" &>/dev/null; then
+                prips "$subnet" >> "ext/$domain-ips.txt"
+            else
+                echo "Invalid subnet: $subnet"
+            fi
+        fi
     done < "ext/$domain.txt"
 }
+
 
 ip_gen
 
